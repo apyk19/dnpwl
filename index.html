@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -31,6 +32,7 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-search.js"></script>
         <script src="data/_2.js"></script>
         <script>
@@ -128,8 +130,7 @@
                         <td colspan="2">' + (feature.properties['Type_th'] !== null ? autolinker.link(feature.properties['Type_th'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Name_th</th>\
-                        <td>' + (feature.properties['Name_th'] !== null ? autolinker.link(feature.properties['Name_th'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Name_th'] !== null ? autolinker.link(feature.properties['Name_th'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['forest_com'] !== null ? autolinker.link(feature.properties['forest_com'].toLocaleString()) : '') + '</td>\
@@ -138,7 +139,8 @@
                         <td colspan="2">' + (feature.properties['no'] !== null ? autolinker.link(feature.properties['no'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">name</th>\
+                        <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -175,6 +177,16 @@
         });
         bounds_group.addLayer(layer__2);
         map.addLayer(layer__2);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
         var baseMaps = {};
         L.control.layers(baseMaps,{'<img src="legend/_2.png" /> กลุ่มป่าดงพญาเย็น-เขาใหญ่': layer__2,"ele_avg": layer_ele_avg_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
         setBounds();
@@ -182,7 +194,7 @@
             layer: layer__2,
             initial: false,
             hideMarkerOnCollapse: true,
-            propertyName: 'Name_th'}));
+            propertyName: 'name'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
         L.ImageOverlay.include({

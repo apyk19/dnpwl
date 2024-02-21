@@ -40,17 +40,6 @@
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
-
-            if (e.target.feature.geometry.type === 'LineString') {
-              highlightLayer.setStyle({
-                color: '#ffff00',
-              });
-            } else {
-              highlightLayer.setStyle({
-                fillColor: '#ffff00',
-                fillOpacity: 1
-              });
-            }
             highlightLayer.openPopup();
         }
         var map = L.map('map', {
@@ -113,9 +102,6 @@
         function pop_2564_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
                     if (typeof layer.closePopup == 'function') {
                         layer.closePopup();
                     } else {
@@ -178,7 +164,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(227,26,28,1.0)',
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_2564_2');
@@ -186,7 +172,7 @@
         map.getPane('pane_2564_2').style['mix-blend-mode'] = 'normal';
         var layer_2564_2 = new L.geoJson(json_2564_2, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_2564_2',
             layerName: 'layer_2564_2',
             pane: 'pane_2564_2',
@@ -204,9 +190,6 @@
         function pop__3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
                     if (typeof layer.closePopup == 'function') {
                         layer.closePopup();
                     } else {
@@ -280,7 +263,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/_3.png" /> กลุ่มป่าดงพญาเย็น-เขาใหญ่': layer__3,'<img src="legend/2564_2.png" /> พิกัดช้างป่า ปี 2564': layer_2564_2,"พื้นที่การใช้ประโยชน์ของช้างป่า": layer__1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/_3.png" /> กลุ่มป่าดงพญาเย็น-เขาใหญ่': layer__3,'<img src="legend/2564_2.png" /> พิกัดช้างป่า ปี 2564': layer_2564_2,"พื้นที่การใช้ประโยชน์ของช้างป่า": layer__1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: layer__3,

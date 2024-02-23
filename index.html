@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
@@ -34,6 +36,9 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
         <script src="data/2562_1.js"></script>
         <script src="data/_2.js"></script>
         <script>
@@ -105,10 +110,8 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['GRIDCODE'] !== null ? autolinker.link(feature.properties['GRIDCODE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>Descrip</strong><br />' + (feature.properties['Descrip'] !== null ? autolinker.link(feature.properties['Descrip'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ช่วงค่าความเหมาะสม</th>\
+                        <td>' + (feature.properties['Descrip'] !== null ? autolinker.link(feature.properties['Descrip'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ForestCom'] !== null ? autolinker.link(feature.properties['ForestCom'].toLocaleString()) : '') + '</td>\
@@ -125,7 +128,7 @@
         }
 
         function style_2562_1_0(feature) {
-            switch(String(feature.properties['GRIDCODE'])) {
+            switch(String(feature.properties['q2wHide_GRIDCODE'])) {
                 default:
                     return {
                 pane: 'pane_2562_1',
@@ -262,62 +265,18 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID_1'] !== null ? autolinker.link(feature.properties['OBJECTID_1'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">พื้นที่อนุรักษ์</th>\
+                        <td>' + (feature.properties['Type_th'] !== null ? autolinker.link(feature.properties['Type_th'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PERIMETER'] !== null ? autolinker.link(feature.properties['PERIMETER'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CODE_INIT'] !== null ? autolinker.link(feature.properties['CODE_INIT'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CODE_EX1'] !== null ? autolinker.link(feature.properties['CODE_EX1'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CODE_EX2'] !== null ? autolinker.link(feature.properties['CODE_EX2'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SOURCE'] !== null ? autolinker.link(feature.properties['SOURCE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Type_e'] !== null ? autolinker.link(feature.properties['Type_e'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Type_th'] !== null ? autolinker.link(feature.properties['Type_th'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Name_TH'] !== null ? autolinker.link(feature.properties['Name_TH'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Name</th>\
-                        <td>' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['UTMZone'] !== null ? autolinker.link(feature.properties['UTMZone'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PARO'] !== null ? autolinker.link(feature.properties['PARO'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ชื่อหน่วยงาน</th>\
+                        <td>' + (feature.properties['Name_TH'] !== null ? autolinker.link(feature.properties['Name_TH'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['PARO_NAME'] !== null ? autolinker.link(feature.properties['PARO_NAME'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['forest_com'] !== null ? autolinker.link(feature.properties['forest_com'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Remark'] !== null ? autolinker.link(feature.properties['Remark'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -371,9 +330,191 @@
             layer: layer__2,
             initial: false,
             hideMarkerOnCollapse: true,
-            propertyName: 'Name'}));
+            propertyName: 'Name_TH'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Type_th": "str","Name_TH": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Type_th = document.createElement('div');
+            div_Type_th.id = "div_Type_th";
+            div_Type_th.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Type_th);
+            sel_Type_th = document.createElement('select');
+            sel_Type_th.multiple = true;
+            sel_Type_th.size = 4;
+            sel_Type_th.id = "sel_Type_th";
+            var Type_th_options_str = "<option value='' unselected></option>";
+            sel_Type_th.onchange = function(){filterFunc()};
+            Type_th_options_str  += '<option value="อุทยานแห่งชาติ">อุทยานแห่งชาติ</option>';
+            Type_th_options_str  += '<option value="เขตรักษาพันธุ์สัตว์ป่า">เขตรักษาพันธุ์สัตว์ป่า</option>';
+            Type_th_options_str  += '<option value="เขตห้ามล่าสัตว์ป่า">เขตห้ามล่าสัตว์ป่า</option>';
+            Type_th_options_str  += '<option value="เตรียมการเขตห้ามล่าสัตว์ป่า">เตรียมการเขตห้ามล่าสัตว์ป่า</option>';
+            sel_Type_th.innerHTML = Type_th_options_str;
+            div_Type_th.appendChild(sel_Type_th);
+            var lab_Type_th = document.createElement('div');
+            lab_Type_th.innerHTML = 'Type_th';
+            lab_Type_th.className = 'filterlabel';
+            div_Type_th.appendChild(lab_Type_th);
+            var reset_Type_th = document.createElement('div');
+            reset_Type_th.innerHTML = 'clear filter';
+            reset_Type_th.className = 'filterlabel';
+            reset_Type_th.onclick = function() {
+                var options = document.getElementById("sel_Type_th").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Type_th.appendChild(reset_Type_th);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Name_TH = document.createElement('div');
+            div_Name_TH.id = "div_Name_TH";
+            div_Name_TH.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Name_TH);
+            sel_Name_TH = document.createElement('select');
+            sel_Name_TH.multiple = true;
+            sel_Name_TH.size = 10;
+            sel_Name_TH.id = "sel_Name_TH";
+            var Name_TH_options_str = "<option value='' unselected></option>";
+            sel_Name_TH.onchange = function(){filterFunc()};
+            Name_TH_options_str  += '<option value="กุยบุรี">กุยบุรี</option>';
+            Name_TH_options_str  += '<option value="ชะอำ">ชะอำ</option>';
+            Name_TH_options_str  += '<option value="ถ้ำค้างคาว-เขาช่องพราน">ถ้ำค้างคาว-เขาช่องพราน</option>';
+            Name_TH_options_str  += '<option value="วัดถ้ำระฆัง-เขาพระนอน">วัดถ้ำระฆัง-เขาพระนอน</option>';
+            Name_TH_options_str  += '<option value="หาดวนกร">หาดวนกร</option>';
+            Name_TH_options_str  += '<option value="เขากระปุก_เขาเตาหม้อ">เขากระปุก_เขาเตาหม้อ</option>';
+            Name_TH_options_str  += '<option value="เขาประทับช้าง">เขาประทับช้าง</option>';
+            Name_TH_options_str  += '<option value="เขาสามร้อยยอด">เขาสามร้อยยอด</option>';
+            Name_TH_options_str  += '<option value="เฉลิมพระเกียรติไทยประจัน">เฉลิมพระเกียรติไทยประจัน</option>';
+            Name_TH_options_str  += '<option value="แก่งกระจาน">แก่งกระจาน</option>';
+            Name_TH_options_str  += '<option value="แม่น้ำภาชี">แม่น้ำภาชี</option>';
+            sel_Name_TH.innerHTML = Name_TH_options_str;
+            div_Name_TH.appendChild(sel_Name_TH);
+            var lab_Name_TH = document.createElement('div');
+            lab_Name_TH.innerHTML = 'Name_TH';
+            lab_Name_TH.className = 'filterlabel';
+            div_Name_TH.appendChild(lab_Name_TH);
+            var reset_Name_TH = document.createElement('div');
+            reset_Name_TH.innerHTML = 'clear filter';
+            reset_Name_TH.className = 'filterlabel';
+            reset_Name_TH.onclick = function() {
+                var options = document.getElementById("sel_Name_TH").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Name_TH.appendChild(reset_Name_TH);
         </script>
     </body>
 </html>
